@@ -1,0 +1,12 @@
+{
+    "name": "alexandre/song-box",
+    "require": {
+        "vlucas/phpdotenv": "^5.5"
+    },
+    "authors": [
+        {
+            "name": "alexxandre80",
+            "email": "45202922+alexxandre80@users.noreply.github.com"
+        }
+    ]
+}
