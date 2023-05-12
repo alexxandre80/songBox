@@ -15,7 +15,7 @@ $api_key = $_ENV['YOUTUBE_API_KEY'];
 
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,6 +39,17 @@ $api_key = $_ENV['YOUTUBE_API_KEY'];
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
         }
+      }
+
+      .containerI {
+        position: relative;
+      }
+
+      .element {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 1;
       }
     </style>
 
@@ -141,7 +152,11 @@ $api_key = $_ENV['YOUTUBE_API_KEY'];
 
             <div class="col-sm-4 my-3">
                 <div class="card" style="width: 18rem;">
-                    <img src="<?= $thumbnail_url ?>" class="card-img-top" alt="...">
+                    <div class="containerI">
+                      <!-- bouton au format d'une croix rouge qui permet de supprimer l'audio  -->
+                      <img src="<?= $thumbnail_url ?>" class="card-img-top" alt="...">
+                      <button type="button" class="btn-close bg-danger element" aria-label="Close" onclick="deleteAudio('<?= $song ?>')"></button>
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title">
                             <?php $song = str_replace('.mp3', '', $song); ?>
@@ -198,6 +213,21 @@ $api_key = $_ENV['YOUTUBE_API_KEY'];
           formData.append('file', file);
           xhr.send(formData);
         }
+
+        //deleteAudio function
+        function deleteAudio($i){
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', 'delete.php?file='+$i, true);
+          xhr.onload = function(){
+            if(this.status == 200){
+              console.log(this.responseText);
+              //recharger la page
+              window.location.reload();
+            }
+          }
+          xhr.send();
+        }
+
 
     </script>
 
